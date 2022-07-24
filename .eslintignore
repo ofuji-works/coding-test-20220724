@@ -1,3 +1,5 @@
 config
 public
 scripts
+
+jest.config.js
