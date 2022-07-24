@@ -229,6 +229,11 @@ module.exports = function (webpackEnv) {
         : isEnvDevelopment &&
           (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
     },
+    resolve: {
+      alias: {
+        '.': path.resolve(__dirname, 'src'),
+      },
+    },
     cache: {
       type: 'filesystem',
       version: createEnvironmentHash(env.raw),
