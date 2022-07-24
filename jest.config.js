@@ -1,40 +1,26 @@
 module.exports = {
-	roots: [
-		"<rootDir>/src",
-	],
-	collectCoverageFrom: [
-		"src/**/*.{ts,tsx}",
-		"!src/**/*.d.ts",
-		"!src/__tests__",
-	],
-	setupFiles: [
-		"react-app-polyfill/jsdom",
-	],
-	setupFilesAfterEnv: [
-		"<rootDir>/src/__tests__/setupTests.ts",
-	],
-	testMatch: [
-		"<rootDir>/src/__tests__/**/*.{spec}.{ts,tsx}",
-	],
-	testEnvironment: "jsdom",
-	transform: {
-		"^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
-		"^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-		"^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js",
-	},
-	transformIgnorePatterns: [
-		"[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$",
-	],
-	moduleNameMapper: {
-		"^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-	},
-	moduleFileExtensions: [
-		"ts",
-		"tsx",
-	],
-	watchPlugins: [
-		"jest-watch-typeahead/filename",
-		"jest-watch-typeahead/testname"
-	],
-	resetMocks: true
+  globals: {
+    "ts-jest": {
+      tsconfig: "<rootDir>/src/__tests__/tsconfig.test.json",
+    },
+  },
+  roots: ["<rootDir>/src"],
+  testMatch: ["**/__tests__/**/*.+(spec|test).+(ts|tsx|js)"],
+  transform: {
+    "^.+\\.(ts|tsx)$": "ts-jest",
+  },
+  transformIgnorePatterns: ["node_modules"],
+  moduleNameMapper: {
+    "^apis": "<rootDir>/src/apis",
+    "^config": "<rootDir>/src/config",
+    "^features/(.+)": "<rootDir>/src/features/$1",
+    "\\.(css|less|sass|scss)$": "<rootDir>/src/__tests__/mocks/styleMock.ts",
+  },
+  cacheDirectory: "<rootDir>/src/__tests__/.cache",
+  collectCoverage: true,
+  collectCoverageFrom: ["**/*.{ts,tsx}", "!**/config/**", "!**/__tests__/**"],
+  coverageDirectory: "<rootDir>/src/__tests__/.coverage",
+  setupFilesAfterEnv: ["<rootDir>/src/__tests__/setupTests.ts"],
+  testEnvironment: "jest-environment-jsdom",
+  verbose: true,
 }
