@@ -1,3 +1,9 @@
 import { rest } from "msw"
 
-export const handlers = []
+import { prefecturesApiResponse } from "../mocks"
+
+export const handlers = [
+  rest.get("/", (_, res, ctx) => {
+    res(ctx.status(200), ctx.json(prefecturesApiResponse))
+  }),
+]
