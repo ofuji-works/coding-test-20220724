@@ -6,11 +6,12 @@ import {
   LineChart as RCLinChart,
   Line as RCLine,
   Legend,
-  Tooltip,
   XAxis,
   YAxis,
   ResponsiveContainer,
 } from "recharts"
+
+import "./style.scss"
 
 type Data = {
   name: string
@@ -43,7 +44,7 @@ export const LineChart: FC<LineChartProps> = (props) => {
     yTickFormatter,
   } = props
   return (
-    <ResponsiveContainer width="100%" height={600}>
+    <ResponsiveContainer width="100%" className="line-chart">
       <RCLinChart
         width={width}
         height={height}
@@ -64,9 +65,8 @@ export const LineChart: FC<LineChartProps> = (props) => {
           tickFormatter={yTickFormatter}
           padding={{ top: 16 }}
         >
-          <Label value={yLabel} offset={0} position="top" />
+          <Label value={yLabel} offset={0} position="left" angle={-90} />
         </YAxis>
-        <Legend />
         {data.map((d) => (
           <RCLine
             dataKey={yDataKey}
@@ -76,6 +76,7 @@ export const LineChart: FC<LineChartProps> = (props) => {
             stroke={"#" + Math.floor(Math.random() * 16777215).toString(16)}
           />
         ))}
+        <Legend />
       </RCLinChart>
     </ResponsiveContainer>
   )

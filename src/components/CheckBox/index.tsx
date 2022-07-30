@@ -1,7 +1,5 @@
 import { ChangeEventHandler, FC } from "react"
 
-import "./style.scss"
-
 export type CheckBoxProps = {
   code: number
   name: string
