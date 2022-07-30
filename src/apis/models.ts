@@ -6,3 +6,16 @@ export type PrefecturesResponse = Response<
     prefName: string
   }[]
 >
+
+export type PopulationsResponse = Response<{
+  boundaryYear: number
+  data: [
+    {
+      label: string
+      data: {
+        year: number
+        value: number
+      }[]
+    },
+  ]
+}>
