@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import { getPrefectures, Error, Response } from "apis"
+import { getPrefectures, Error, PrefecturesResponse } from "apis"
 
 import type { Prefecture } from "../types"
 
@@ -32,7 +32,7 @@ export const usePrefectures = (): ReturnUsePrefectures => {
     setLoading(true)
     setError(null)
     getPrefectures()
-      .then((res: Response<Prefecture[]>) => {
+      .then((res: PrefecturesResponse) => {
         setPrefetures(res.data.result)
       })
       .catch((err: Error) => {
