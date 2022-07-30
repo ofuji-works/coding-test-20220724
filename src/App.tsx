@@ -1,10 +1,15 @@
+import { lazy, Suspense } from "react"
+
 import { Layout } from "components"
-import { EnhancedResasDataAnalyze } from "features/resas"
+
+const Resas = lazy(() => import("features/resas"))
 
 function App() {
   return (
     <Layout title="都道府県別の総人口推移グラフ">
-      <EnhancedResasDataAnalyze />
+      <Suspense>
+        <Resas />
+      </Suspense>
     </Layout>
   )
 }
