@@ -1,26 +1,48 @@
 module.exports = {
-  globals: {
-    "ts-jest": {
-      tsconfig: "<rootDir>/src/__tests__/tsconfig.test.json",
-    },
-  },
   roots: ["<rootDir>/src"],
   testMatch: ["**/__tests__/**/*.+(spec|test).+(ts|tsx|js)"],
+  testEnvironment: "jsdom",
   transform: {
-    "^.+\\.(ts|tsx)$": "ts-jest",
+    "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
+    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+    "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)":
+      "<rootDir>/config/jest/fileTransform.js",
   },
-  transformIgnorePatterns: ["node_modules"],
+  transformIgnorePatterns: [
+    "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$",
+    "^.+\\.module\\.(css|sass|scss)$",
+  ],
+  modulePaths: [],
   moduleNameMapper: {
+    "^react-native$": "react-native-web",
+    "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy",
     "^apis": "<rootDir>/src/apis",
     "^config": "<rootDir>/src/config",
+    "^components": "<rootDir>/src/components",
     "^features/(.+)": "<rootDir>/src/features/$1",
-    "\\.(css|less|sass|scss)$": "<rootDir>/src/__tests__/mocks/styleMock.ts",
   },
   cacheDirectory: "<rootDir>/src/__tests__/.cache",
   collectCoverage: true,
   collectCoverageFrom: ["**/*.{ts,tsx}", "!**/config/**", "!**/__tests__/**"],
   coverageDirectory: "<rootDir>/src/__tests__/.coverage",
+  setupFiles: ["react-app-polyfill/jsdom"],
   setupFilesAfterEnv: ["<rootDir>/src/__tests__/setupTests.ts"],
-  testEnvironment: "jest-environment-jsdom",
+  moduleFileExtensions: [
+    "web.js",
+    "js",
+    "web.ts",
+    "ts",
+    "web.tsx",
+    "tsx",
+    "json",
+    "web.jsx",
+    "jsx",
+    "node",
+  ],
+  watchPlugins: [
+    "jest-watch-typeahead/filename",
+    "jest-watch-typeahead/testname",
+  ],
+  resetMocks: true,
   verbose: true,
 }

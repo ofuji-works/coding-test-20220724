@@ -1,24 +1,16 @@
-import logo from "./logo.svg"
-import "./App.css"
+import { lazy, Suspense } from "react"
+
+import { Layout } from "components"
+
+const Resas = lazy(() => import("features/resas"))
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout title="都道府県別の総人口推移グラフ">
+      <Suspense>
+        <Resas />
+      </Suspense>
+    </Layout>
   )
 }
 
